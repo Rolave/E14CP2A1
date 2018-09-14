@@ -7,7 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Employees</th>
-      <th colspan="2"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -16,9 +16,27 @@
       <tr>
         <td><%= link_to company.name, company %></td>
         <td><%= company.employees.count %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Edit', edit_company_path(company) %>
+          <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
+        <%
+          company_areas = {}
+          company.employees.each do |e|
+            if company_areas.key?(e.area.name)
+              company_areas[e.area.name] += 1
+            else
+              company_areas[e.area.name] = 1
+            end
+          end
+        %>
+        <% company_areas.each do |key, value| %>
+        <tr class="active">
+          <td><%= key %></td>
+          <td colspan="2"><%= value %></td>
+        </tr>
+        <% end %>
     <% end %>
   </tbody>
 </table>
