@@ -18,7 +18,7 @@
         <td><%= company.employees.count %></td>
         <td>
           <%= link_to 'Edit', edit_company_path(company) %>
-          <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', company_path(company), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
         <%
